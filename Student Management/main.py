@@ -33,27 +33,27 @@ if keyLen != valueLen:
                     break
             students = {keys[i]: values[i] for i in range(len(keys))}
             print(students)
-    # else:
-    #     keys.extend([""] * (len(values) - len(keys)))
-    #     diff = valueLen - keyLen
-    #     print(f"There are {diff} grades without named students!")
-    #     for i in range(diff):
-    #         print(keys[-diff])
-    #         diff -= 1
-    #     decision = input("Do you want to continue or do you want to enter the names through here (1/2): ")
-    #     if decision == "1":
-    #         students = {keys[i]: values[i] for i in range(len(values)-diff)}
-    #         print(students)
-    #     elif decision == "2":
-    #         while diff > 0:
-    #             for i in range(diff):
-    #                 name = int(input(f"What is the name of the kid that has these grades {values[-diff]}: "))
-    #                 keys[-diff] = name
-    #                 diff -= 1
-    #             if diff == 0:
-    #                 break
-    #         students = {keys[i]: values[i] for i in range(len(keys))}
-    #         print(students)
+    else:
+        keys.extend([""] * (len(values) - len(keys)))
+        diff = valueLen - keyLen
+        print(f"There are {diff} grades without named students!")
+        for i in range(diff):
+            print(values[-diff])
+            diff -= 1
+        decision = input("Do you want to continue or do you want to enter the names through here (1/2): ")
+        if decision == "1":
+            students = {keys[i]: values[i] for i in range(len(values)-diff)}
+            print(students)
+        elif decision == "2":
+            while diff > 0:
+                for i in range(diff):
+                    name = int(input(f"What is the name of the kid that has these grades {values[-diff]}: "))
+                    keys[-diff] = name
+                    diff -= 1
+                if diff == 0:
+                    break
+            students = {keys[i]: values[i] for i in range(len(keys))}
+            print(students)
 
 for i in range(valueLen):
     if values[i] == "":
