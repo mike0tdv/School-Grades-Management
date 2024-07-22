@@ -6,6 +6,7 @@ with open('Student Grades.txt', 'r') as file:
 keyLen = len(keys)
 valueLen = len(values)
 grades = []
+missing_values = []
 
 if keyLen != valueLen:
     if keyLen > valueLen:
@@ -54,27 +55,34 @@ if keyLen != valueLen:
     #         students = {keys[i]: values[i] for i in range(len(keys))}
     #         print(students)
 
-
-
 for i in range(valueLen):
     if values[i] == "":
-        missing = + 1
+        missing_values.append(i)
 
-        print("The following student does not have any entered grades: " + keys[i])
-        decision = input("Do you want to continue or do you want to enter the grades through here (1/2): ")
-        if decision == "1":
-            students = {keys[i]: values[i] for i in range(len(keys))}
-            print(students)
-        elif decision == "2":
-            length = int(input(f"How many grades should {keys[i]} have: "))
-            grades = []
-            for k in range(length):
-                grades.append(input(f"Enter the {k+1} grade: "))
-            values[i] = ' '.join(grades)
-            students = {keys[i]: values[i] for i in range(len(keys))}
-            print(students)
-    else:
+if len(missing_values) == 0:
+    students = {keys[i]: values[i] for i in range(len(keys))}
+    print(students)
+else:
+    print(f"There are {len(missing_values)} students without grades!")
+    for i in range(len(missing_values)):
+        print(keys[missing_values[i]])
+    decision = input("Do you want to continue or do you want to enter the grades through here (1/2): ")
+    if decision == "1":
         students = {keys[i]: values[i] for i in range(len(keys))}
         print(students)
-        break
+    elif decision == "2":
+        for i in range(len(missing_values)):
+            length = int(input(f"How many grades should {keys[missing_values[i]]} have: "))
+            for k in range(length):
+                grades.append(input(f"Enter the {k + 1} grade: "))
+            values[missing_values[i]] = ' '.join(grades)
+            grades = []
+        students = {keys[i]: values[i] for i in range(len(keys))}
+        print(students)
+
+
+
+
+
+
 
